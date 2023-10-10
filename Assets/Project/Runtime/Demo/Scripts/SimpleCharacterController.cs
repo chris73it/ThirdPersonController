@@ -71,12 +71,12 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
             isOnMovingPlatform = false;
 
-            if (isGrounded && Input.GetButtonDown("Jump"))
-            {
-                verticalSpeed = jumpSpeed;
-                nextUngroundedTime = -1f;
-                isGrounded = false;
-            }
+            //if (isGrounded && Input.GetButtonDown("Jump"))
+            //{
+            //    verticalSpeed = jumpSpeed;
+            //    nextUngroundedTime = -1f;
+            //    isGrounded = false;
+            //}
 
             if (isGrounded)
             {
@@ -113,13 +113,14 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         private Vector3 GetMovementInput()
         {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
+            //float x = Input.GetAxis("Horizontal");
+            //float y = Input.GetAxis("Vertical");
 
-            Vector3 forward = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
-            Vector3 right = Vector3.Cross(transform.up, forward);
+            //Vector3 forward = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
+            //Vector3 right = Vector3.Cross(transform.up, forward);
 
-            return x * right + y * forward;
+            //return x * right + y * forward;
+            return Vector3.zero;
         }
 
         private void HandleOverlaps()

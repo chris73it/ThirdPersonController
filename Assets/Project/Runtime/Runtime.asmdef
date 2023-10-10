@@ -2,7 +2,8 @@
     "name": "NewAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:ae9be5ad8f4fea54cb89b3e70d3d8d62"
+        "GUID:ae9be5ad8f4fea54cb89b3e70d3d8d62",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

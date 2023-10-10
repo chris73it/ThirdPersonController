@@ -26,8 +26,8 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         private void LateUpdate()
         {
-            yRot += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-            xRot -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            //yRot += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            //xRot -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
             xRot = Mathf.Clamp(xRot, 0f, 75f);
 
             Quaternion worldRotation = transform.parent != null ? transform.parent.rotation : Quaternion.FromToRotation(Vector3.up, target.up);
