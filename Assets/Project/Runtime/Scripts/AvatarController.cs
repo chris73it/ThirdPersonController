@@ -1,19 +1,19 @@
-﻿//#define MB_DEBUG
-
+﻿using UnityEngine;
 using MenteBacata.ScivoloCharacterController;
-using System.Collections.Generic;
-using UnityEngine;
+//using MenteBacata.ScivoloCharacterControllerDemo;
+using HeroicArcade.CC.Demo;
+using System.Text.RegularExpressions;
 
-namespace MenteBacata.ScivoloCharacterControllerDemo
+namespace HeroicArcade.CC.Core
 {
-    public class SimpleCharacterController : MonoBehaviour
+    public class AvatarController : MonoBehaviour
     {
-        
-        
+        public Character Character { get; private set; }
+
         public float moveSpeed = 5f;
 
         public float jumpSpeed = 8f;
-        
+
         public float rotationSpeed = 720f;
 
         public float gravity = -25f;
@@ -51,10 +51,10 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         private MovingPlatform movingPlatform;
 
-
-
-
-
+        private void Awake()
+        {
+            Character = GetComponent<Character>();
+        }
 
         private void Start()
         {
@@ -68,7 +68,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
             Vector3 movementInput = GetMovementInput();
 
             Vector3 velocity = moveSpeed * movementInput;
-            
+
             HandleOverlaps();
 
             bool groundDetected = DetectGroundAndCheckIfGrounded(out bool isGrounded, out GroundInfo groundInfo);
@@ -77,7 +77,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
             isOnMovingPlatform = false;
 
-            if (isGrounded && Input.GetButtonDown("Jump"))
+            if (isGrounded && Character.InputController.IsJumpPressed)
             {
                 verticalSpeed = jumpSpeed;
                 nextUngroundedTime = -1f;
@@ -107,7 +107,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
             }
 
             RotateTowards(velocity);
-
+            //mover.Move(velocity * deltaTime, moveContacts, out contactCount); //FIXME
             mover.Move(velocity * deltaTime, groundDetected, groundInfo, overlapCount, overlaps, moveContacts, out contactCount);
         }
 
@@ -119,14 +119,21 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         private Vector3 GetMovementInput()
         {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-
+            float x = currentMovement.x; // 0; // Input.GetAxis("Horizontal");
+            float y = currentMovement.z; //0; // Input.GetAxis("Vertical");
             Vector3 forward = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
             Vector3 right = Vector3.Cross(transform.up, forward);
-
             return x * right + y * forward;
         }
+
+        Vector3 projectedCameraForward;
+        Quaternion rotationToCamera;
+        //private Vector3 GetMovementInput()
+        //{
+        //    projectedCameraForward = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up);
+        //    rotationToCamera = Quaternion.LookRotation(projectedCameraForward, transform.up);
+        //    return rotationToCamera * (currentMovement.x * Vector3.right + currentMovement.z * Vector3.forward);
+        //}
 
         private void HandleOverlaps()
         {
@@ -162,7 +169,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
                 groundedIndicator.material.color = isGrounded ? Color.green : Color.blue;
         }
 
-        private void RotateTowards(Vector3 direction)
+        private void RotateTowards(in Vector3 direction)
         {
             Vector3 flatDirection = Vector3.ProjectOnPlane(direction, transform.up);
 
@@ -195,7 +202,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
             else
                 deltaAngleUp = platformDeltaAngle * Mathf.Sign(axisDotUp);
         }
-        
+
         private void BounceDownIfTouchedCeiling()
         {
             for (int i = 0; i < contactCount; i++)
@@ -206,6 +213,14 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
                     break;
                 }
             }
+        }
+
+        private Vector3 currentMovement;
+        public void OnMoveInput(Vector2 moveInput)
+        {
+            //y needs to preserve its value from the previous Update.
+            currentMovement.x = moveInput.x;
+            currentMovement.z = moveInput.y;
         }
     }
 }
