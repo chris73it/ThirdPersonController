@@ -27,7 +27,7 @@ namespace HeroicArcade.CC.Core
             {
                 Debug.LogWarning("Resources::_Main is inactive");
             }
-            _mainResources = Object.Instantiate(_mainResources);
+            _mainResources = Object.Instantiate(_mainResources); 
             _mainResources.name = "_Main"; // Remove trailing (Clone) from _Main(Clone)'s name.
             GameObject.DontDestroyOnLoad(_mainResources);
         }

@@ -3,12 +3,17 @@ using MenteBacata.ScivoloCharacterController;
 //using MenteBacata.ScivoloCharacterControllerDemo;
 using HeroicArcade.CC.Demo;
 using System.Text.RegularExpressions;
+using Cinemachine;
+using System.Collections;
 
 namespace HeroicArcade.CC.Core
 {
     public class AvatarController : MonoBehaviour
     {
         public Character Character { get; private set; }
+        
+        [SerializeField] CinemachineFreeLook cinemachineFreeLook;     // Recenter X (World Space)
+        [SerializeField] SimpleFollowRecenterX simpleFollowRecenterX; // Recenter X (Simple Follow With World Up)
 
         public float moveSpeed = 5f;
 
@@ -54,6 +59,17 @@ namespace HeroicArcade.CC.Core
         private void Awake()
         {
             Character = GetComponent<Character>();
+            if (cinemachineFreeLook.m_BindingMode == CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp)
+            {
+                if (simpleFollowRecenterX == null)
+                {
+                    Debug.LogError("Unable to OnCameraRecenterX() because CinemachineTransposer.BindingMode is SimpleFollowWithWorldUp, but SimpleFollowRecenterX component is null");
+                }
+                else
+                {
+                    simpleFollowRecenterX.enabled = true;
+                }
+            }
         }
 
         private void Start()
@@ -248,6 +264,42 @@ namespace HeroicArcade.CC.Core
             //y needs to preserve its value from the previous Update.
             currentMovement.x = moveInput.x;
             currentMovement.z = moveInput.y;
+        }
+
+        IEnumerator CameraRecenterX(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            cinemachineFreeLook.m_RecenterToTargetHeading.m_RecenteringTime = 0;
+            cinemachineFreeLook.m_RecenterToTargetHeading.m_enabled = false;
+        }
+
+        public void OnCameraRecenterX(bool isCameraRecenterXPressed)
+        {
+            switch (cinemachineFreeLook.m_BindingMode)
+            {
+                case CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp:
+                    if (isCameraRecenterXPressed)
+                        simpleFollowRecenterX.recenter = true;
+                    break;
+                case CinemachineTransposer.BindingMode.WorldSpace:
+                    if (cinemachineFreeLook.m_RecenterToTargetHeading.m_enabled)
+                    {
+                        if (!isCameraRecenterXPressed)
+                        {
+                            cinemachineFreeLook.m_RecenterToTargetHeading.m_RecenteringTime = 0;
+                            cinemachineFreeLook.m_RecenterToTargetHeading.m_enabled = false;
+                        }
+                    }
+                    else if (isCameraRecenterXPressed)
+                    {
+                        const float duration = 2; // 0.01f;
+                        cinemachineFreeLook.m_RecenterToTargetHeading.m_enabled = isCameraRecenterXPressed;
+                        cinemachineFreeLook.m_RecenterToTargetHeading.m_RecenteringTime = duration;
+                        cinemachineFreeLook.m_RecenterToTargetHeading.RecenterNow();
+                        StartCoroutine("CameraRecenterX", duration + 0.03f); //A very long period
+                    }
+                    break;
+            }
         }
     }
 }
