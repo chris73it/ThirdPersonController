@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510776675504041279}
-  m_LocalRotation: {x: 0.059273098, y: -0.0000000021470163, z: 1.2748444e-10, w: 0.99824184}
+  m_LocalRotation: {x: 0.059273098, y: 0.0000000021470161, z: -1.2748443e-10, w: 0.99824184}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -230,7 +230,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798123899139888086}
-  m_LocalRotation: {x: 0.059273098, y: -0.0000000021470161, z: 1.2748443e-10, w: 0.99824184}
+  m_LocalRotation: {x: 0.059273098, y: 0.0000000021470163, z: -1.2748444e-10, w: 0.99824184}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -309,7 +309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241838341050516928}
-  m_LocalRotation: {x: 0.041153785, y: 0.000000017191804, z: -7.081077e-10, w: 0.99915284}
+  m_LocalRotation: {x: 0.041153785, y: -0.000000017191805, z: 7.081078e-10, w: 0.99915284}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1498,8 +1498,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  cameraAimEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6846017032968213765}
+        m_TargetAssemblyTypeName: HeroicArcade.CC.Core.AvatarController, NewAssembly
+        m_MethodName: OnCameraAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  aimSwapEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6846017032968213765}
+        m_TargetAssemblyTypeName: HeroicArcade.CC.Core.AvatarController, NewAssembly
+        m_MethodName: OnAimSwap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   IsMovePressed: 0
   IsJumpPressed: 0
+  IsAimingPressed: 0
 --- !u!1 &4956296646189222212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,7 +1732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Offset: {x: -0.5, y: 0, z: 0}
+  m_Offset: {x: -0.6, y: 0.2, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
 --- !u!1 &4980415431940671254
@@ -2111,7 +2142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Offset: {x: 0.5, y: 0, z: 0}
+  m_Offset: {x: 0.6, y: 0.2, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
 --- !u!1 &5336338936662394273
@@ -3158,11 +3189,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 1250664100393500490}
   animator: {fileID: 2192585973499647949}
+  camStyle: 0
   maxWalkSpeed: 6
   CurrentMaxMoveSpeed: 0
   velocity: {x: 0, y: 0, z: 0}
   velocityXZ: 0
   moveAcceleration: 8
+  contactCount: 0
+  turnSpeed: 720
 --- !u!114 &6846017032968213765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3177,6 +3211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineFreeLook: {fileID: 1688102667344971544}
   simpleFollowRecenterX: {fileID: 3700624744712963208}
+  aimCameraLeft: {fileID: 6744872321971534360}
+  aimCameraRight: {fileID: 7860287825177421166}
+  aimCameraOffset: 1
   moveSpeed: 5
   jumpSpeed: 8
   rotationSpeed: 720
