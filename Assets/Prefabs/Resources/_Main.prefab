@@ -230,7 +230,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798123899139888086}
-  m_LocalRotation: {x: 0.059273098, y: 0.0000000021470163, z: -1.2748444e-10, w: 0.99824184}
+  m_LocalRotation: {x: 0.059273098, y: -0.0000000021470161, z: 1.2748443e-10, w: 0.99824184}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -309,7 +309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241838341050516928}
-  m_LocalRotation: {x: 0.041153785, y: -0.000000017191805, z: 7.081078e-10, w: 0.99915284}
+  m_LocalRotation: {x: 0.041153785, y: 0.000000017191804, z: -7.081077e-10, w: 0.99915284}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1512,6 +1512,7 @@ GameObject:
   - component: {fileID: 7860287825177421166}
   - component: {fileID: 1727288059905253895}
   - component: {fileID: 319381849545627055}
+  - component: {fileID: 5464521131274872327}
   m_Layer: 0
   m_Name: Aim Camera Right
   m_TagString: Untagged
@@ -1553,7 +1554,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 20
+  m_Priority: 5
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 6008306387894422425}
   m_Follow: {fileID: 2192585973490366859}
@@ -1688,6 +1689,21 @@ MonoBehaviour:
   m_Damping: 0.1
   m_DampingWhenOccluded: 0.1
   m_OptimalTargetDistance: 0
+--- !u!114 &5464521131274872327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956296646189222212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Offset: {x: -0.5, y: 0, z: 0}
+  m_ApplyAfter: 1
+  m_PreserveComposition: 0
 --- !u!1 &4980415431940671254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,6 +1922,7 @@ GameObject:
   - component: {fileID: 6744872321971534360}
   - component: {fileID: 3154063830745213672}
   - component: {fileID: 6892510991734162732}
+  - component: {fileID: 7137815406814786906}
   m_Layer: 0
   m_Name: Aim Camera Left
   m_TagString: Untagged
@@ -1947,7 +1964,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 20
+  m_Priority: 5
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 6008306387894422425}
   m_Follow: {fileID: 2192585973490366859}
@@ -2082,6 +2099,21 @@ MonoBehaviour:
   m_Damping: 0.1
   m_DampingWhenOccluded: 0.1
   m_OptimalTargetDistance: 0
+--- !u!114 &7137815406814786906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101942511404016396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Offset: {x: 0.5, y: 0, z: 0}
+  m_ApplyAfter: 1
+  m_PreserveComposition: 0
 --- !u!1 &5336338936662394273
 GameObject:
   m_ObjectHideFlags: 3
@@ -2648,8 +2680,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8711671728830181442}
-  m_LocalRotation: {x: 0.05927311, y: 0.0000000042940327, z: -2.5496896e-10, w: 0.99824184}
-  m_LocalPosition: {x: 0, y: 1.5, z: 10.45}
+  m_LocalRotation: {x: 0.17321889, y: -0, z: -0, w: 0.98488337}
+  m_LocalPosition: {x: 0, y: 2.5, z: 9.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2689,7 +2721,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 50
   orthographic: 0
   orthographic size: 10
   m_Depth: -1

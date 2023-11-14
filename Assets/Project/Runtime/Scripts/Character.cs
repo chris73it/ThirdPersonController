@@ -1,3 +1,4 @@
+using MenteBacata.ScivoloCharacterController;
 using UnityEngine;
 
 namespace HeroicArcade.CC.Core
@@ -11,6 +12,8 @@ namespace HeroicArcade.CC.Core
         public Animator Animator { get => animator; }
 
         [Header("Character Parameters")]
+        [SerializeField] CameraStyle camStyle;
+        public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         [SerializeField] float maxWalkSpeed; //6
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
         [HideInInspector] public float CurrentMaxMoveSpeed;
@@ -18,5 +21,17 @@ namespace HeroicArcade.CC.Core
         [HideInInspector] public float velocityXZ = 0f;
         [SerializeField] float moveAcceleration;
         public float MoveAcceleration { get => moveAcceleration; set => moveAcceleration = value; }
+
+        [HideInInspector] public MoveContact[] moveContacts = CharacterMover.NewMoveContactArray;
+        [HideInInspector] public int contactCount;
+
+        public enum CameraStyle
+        {
+            Adventure,
+            Combat,
+        }
+
+        [SerializeField] float turnSpeed;
+        public float TurnSpeed { get => turnSpeed; }
     }
 }

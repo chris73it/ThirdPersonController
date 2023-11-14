@@ -14,6 +14,15 @@ namespace HeroicArcade.CC.Core
         
         [SerializeField] CinemachineFreeLook cinemachineFreeLook;     // Recenter X (World Space)
         [SerializeField] SimpleFollowRecenterX simpleFollowRecenterX; // Recenter X (Simple Follow With World Up)
+        [SerializeField] CinemachineFreeLook aimCameraLeft;
+        [SerializeField] CinemachineFreeLook aimCameraRight;
+
+        public enum AimCameraOffset
+        {
+            Left = 1,
+            Right = -1
+        }
+        public AimCameraOffset aimCameraOffset = AimCameraOffset.Left;
 
         public float moveSpeed = 5f;
 
@@ -212,6 +221,30 @@ namespace HeroicArcade.CC.Core
                 groundedIndicator.material.color = isGrounded ? Color.green : Color.blue;
         }
 
+        private void RotateTowards(Vector3 direction)
+        {
+            switch (Character.CamStyle)
+            {
+                case Character.CameraStyle.Adventure:
+                    //Do nothing
+                    break;
+
+                case Character.CameraStyle.Combat:
+                    direction = cameraTransform.forward;
+                    break;
+
+                default:
+                    Debug.LogError($"Unexpected CameraStyle {Character.CamStyle}");
+                    return;
+            }
+
+            Vector3 flatDirection = Vector3.ProjectOnPlane(direction, transform.up);
+            if (flatDirection.sqrMagnitude < 1E-06f)
+                return;
+            Quaternion targetRotation = Quaternion.LookRotation(flatDirection, transform.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Character.TurnSpeed * Time.deltaTime);
+        }
+
         private void RotateTowards(in Vector3 direction)
         {
             Vector3 flatDirection = Vector3.ProjectOnPlane(direction, transform.up);
@@ -248,9 +281,9 @@ namespace HeroicArcade.CC.Core
 
         private void BounceDownIfTouchedCeiling()
         {
-            for (int i = 0; i < contactCount; i++)
+            for (int i = 0; i < Character.contactCount; i++)
             {
-                if (Vector3.Dot(moveContacts[i].normal, transform.up) < -0.7f)
+                if (Vector3.Dot(Character.moveContacts[i].normal, transform.up) < -0.7f)
                 {
                     verticalSpeed = -0.25f * verticalSpeed;
                     break;
@@ -300,6 +333,38 @@ namespace HeroicArcade.CC.Core
                     }
                     break;
             }
+        }
+        public void OnCameraAim(bool isCameraAimPressed)
+        {
+            Character.CamStyle = isCameraAimPressed ? Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
+            if (!isCameraAimPressed)
+            {
+                aimCameraLeft.Priority = 5;
+                aimCameraRight.Priority = 5;
+            }
+            else if (aimCameraOffset == AimCameraOffset.Left)
+            {
+                aimCameraLeft.Priority = 20;
+                aimCameraRight.Priority = 5;
+            }
+            else
+            {
+                aimCameraLeft.Priority = 5;
+                aimCameraRight.Priority = 20;
+            }
+        }
+
+        public void OnAimSwap()
+        {
+            if (aimCameraOffset == AimCameraOffset.Left)
+            {
+                aimCameraOffset = AimCameraOffset.Right;
+            }
+            else
+            {
+                aimCameraOffset = AimCameraOffset.Left;
+            }
+            OnCameraAim(Character.InputController.IsAimingPressed);
         }
     }
 }
