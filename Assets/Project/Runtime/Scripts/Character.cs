@@ -16,6 +16,8 @@ namespace HeroicArcade.CC.Core
         public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         [SerializeField] float maxWalkSpeed; //6
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
+        [SerializeField] float maxSprintSpeed; //6
+        public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
         [HideInInspector] public float CurrentMaxMoveSpeed;
         [HideInInspector] public Vector3 velocity = Vector3.zero;
         [HideInInspector] public float velocityXZ = 0f;

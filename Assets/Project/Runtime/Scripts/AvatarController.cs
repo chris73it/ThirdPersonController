@@ -91,6 +91,7 @@ namespace HeroicArcade.CC.Core
         {
             Character.Animator.SetBool("IsAimPressed", Character.InputController.IsAimPressed);
             Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
+            Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
 
             float deltaTime = Time.deltaTime;
             Vector3 movementInput = GetMovementInput();
@@ -161,7 +162,10 @@ namespace HeroicArcade.CC.Core
             RotateTowards(velocity);
             mover.Move(velocity * deltaTime, groundDetected, groundInfo, overlapCount, overlaps, moveContacts, out contactCount);
 
-            Character.CurrentMaxMoveSpeed = 3;
+            Character.CurrentMaxMoveSpeed =
+                Character.InputController.IsSprintPressed ? Character.CurrentMaxSprintSpeed : Character.CurrentMaxWalkSpeed;
+
+            //Character.CurrentMaxMoveSpeed = 3;
             Character.Animator.SetFloat("MoveSpeed",
                 new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.CurrentMaxMoveSpeed);
         }
@@ -246,17 +250,6 @@ namespace HeroicArcade.CC.Core
                 return;
             Quaternion targetRotation = Quaternion.LookRotation(flatDirection, transform.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Character.TurnSpeed * Time.deltaTime);
-        }
-
-        private void RotateTowards(in Vector3 direction)
-        {
-            Vector3 flatDirection = Vector3.ProjectOnPlane(direction, transform.up);
-
-            if (flatDirection.sqrMagnitude < 1E-06f)
-                return;
-
-            Quaternion targetRotation = Quaternion.LookRotation(flatDirection, transform.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         private void ApplyPlatformMovement(MovingPlatform movingPlatform)
