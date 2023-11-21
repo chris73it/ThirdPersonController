@@ -202,6 +202,17 @@
                 },
                 {
                     "name": "",
+                    "id": "cab17ff4-cf6a-4452-b003-9b5e23b18c56",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "aa074093-b33d-4fcb-a859-180964537435",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -314,17 +325,6 @@
                     "name": "",
                     "id": "a44db6eb-a4e9-46c7-930a-b8704f31857e",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cab17ff4-cf6a-4452-b003-9b5e23b18c56",
-                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
