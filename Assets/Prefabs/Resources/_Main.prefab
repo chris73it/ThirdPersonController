@@ -785,7 +785,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3032885712059737240}
-  m_LocalRotation: {x: 0.041153785, y: -0.000000017191804, z: 7.081077e-10, w: 0.99915284}
+  m_LocalRotation: {x: 0.041153785, y: 0.000000017191805, z: -7.081078e-10, w: 0.99915284}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3192,8 +3192,9 @@ MonoBehaviour:
   inputController: {fileID: 1250664100393500490}
   animator: {fileID: 2192585973499647949}
   camStyle: 0
+  jumpSpeed: 8
   maxWalkSpeed: 6
-  maxSprintSpeed: 0
+  maxSprintSpeed: 9
   CurrentMaxMoveSpeed: 0
   velocity: {x: 0, y: 0, z: 0}
   velocityXZ: 0
@@ -3218,8 +3219,6 @@ MonoBehaviour:
   aimCameraRight: {fileID: 7860287825177421166}
   aimCameraOffset: 1
   moveSpeed: 5
-  jumpSpeed: 8
-  rotationSpeed: 720
   gravity: -25
   capsule: {fileID: 6808150381760555447}
   mover: {fileID: 2501759513855035913}

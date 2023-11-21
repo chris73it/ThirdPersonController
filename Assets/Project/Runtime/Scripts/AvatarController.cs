@@ -26,9 +26,9 @@ namespace HeroicArcade.CC.Core
 
         public float moveSpeed = 5f;
 
-        public float jumpSpeed = 8f;
+        //public float jumpSpeed = 8f;
 
-        public float rotationSpeed = 720f;
+        //public float rotationSpeed = 720f;
 
         public float gravity = -25f;
 
@@ -106,14 +106,14 @@ namespace HeroicArcade.CC.Core
             HandleOverlaps();
 
             bool groundDetected = DetectGroundAndCheckIfGrounded(out bool isGrounded, out GroundInfo groundInfo);
-
+            Character.Animator.SetBool("IsJumpPressed", !isGrounded);
             SetGroundedIndicatorColor(isGrounded);
 
             isOnMovingPlatform = false;
-
+            
             if (isGrounded && Character.InputController.IsJumpPressed)
             {
-                verticalSpeed = jumpSpeed;
+                verticalSpeed = Character.JumpSpeed;
                 nextUngroundedTime = -1f;
                 isGrounded = false;
             }
