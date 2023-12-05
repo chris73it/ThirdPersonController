@@ -87,6 +87,7 @@ namespace HeroicArcade.CC.Core
             mover.canClimbSteepSlope = true;
         }
 
+        Target target2;
         private void Update()
         {
             Character.Animator.SetBool("IsAimPressed", Character.InputController.IsAimPressed);
@@ -164,6 +165,39 @@ namespace HeroicArcade.CC.Core
 
             Character.CurrentMaxMoveSpeed =
                 Character.InputController.IsSprintPressed ? Character.CurrentMaxSprintSpeed : Character.CurrentMaxWalkSpeed;
+
+            if (Character.InputController.IsAimPressed)
+            {
+                ////Character.Animator.SetBool("IsAimPressed", Character.InputController.IsAimPressed);
+                target2 = Character.AutoAiming.StartAiming();
+
+                //if (Character.InputController.IsShootPressed
+                //    && !(Character.InputController.IsSprintPressed && Character.velocityXZ >= 1E-06f)
+                //    && !Character.InputController.IsJumpPressed)
+                //{
+                //    Character.Rig1.weight = 1;
+                //}
+                ////Character.Animator.SetBool("IsShootPressed", target2 != null && Character.InputController.IsShootPressed);
+                if (target2 != null
+                    && Character.InputController.IsShootPressed
+                    && !(Character.InputController.IsSprintPressed && Character.velocityXZ >= 1E-06f)
+                    && !Character.InputController.IsJumpPressed)
+                {
+                    //fsmState = FSMState.Shooting;
+                    Character.AutoAiming.StartFiring(target2);
+                }
+                else
+                {
+                    //Character.Rig1.weight = 0;
+                }
+            }
+            else
+            {
+                ////Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
+                ////Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
+                //Character.Rig1.weight = 0;
+                Character.AutoAiming.StopAiming();
+            }
 
             //Character.CurrentMaxMoveSpeed = 3;
             Character.Animator.SetFloat("MoveSpeed",

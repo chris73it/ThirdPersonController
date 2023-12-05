@@ -5,6 +5,7 @@ namespace HeroicArcade.CC
 {
     public class Weapon : MonoBehaviour
     {
+        public FloatReference weaponMaxEnergy = null;
         public FloatReference weaponCurrentEnergy = null;
         public FloatReference weaponEnergyConsumption = null;
         public FloatReference hitImpactStrength = null;
@@ -14,5 +15,10 @@ namespace HeroicArcade.CC
         public TrailRenderer bulletTracer;
         public ParticleSystem hitEffect; // This shouldn't be a prefab reference (it doesn't work.)
         public Transform hitPoint;
+
+        void Awake()
+        {
+            weaponCurrentEnergy.Value = weaponMaxEnergy.Value;
+        }
     }
 }

@@ -23,6 +23,8 @@ namespace HeroicArcade.CC.Core
         [HideInInspector] public float CurrentMaxMoveSpeed;
         [HideInInspector] public Vector3 velocity = Vector3.zero;
         [HideInInspector] public float velocityXZ = 0f;
+        [SerializeField] AutoAiming autoAiming;
+        public AutoAiming AutoAiming { get => autoAiming; }
         [SerializeField] float moveAcceleration;
         public float MoveAcceleration { get => moveAcceleration; set => moveAcceleration = value; }
 
