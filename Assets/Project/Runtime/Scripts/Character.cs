@@ -15,7 +15,7 @@ namespace HeroicArcade.CC.Core
         [SerializeField] CameraStyle camStyle;
         public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         [SerializeField] float jumpSpeed; //8
-        public float JumpSpeed { get => jumpSpeed; }
+        public float JumpSpeed { get => jumpSpeed; }
         [SerializeField] float maxWalkSpeed; //6
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
         [SerializeField] float maxSprintSpeed; //9
