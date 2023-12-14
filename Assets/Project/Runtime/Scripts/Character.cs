@@ -20,13 +20,15 @@ namespace HeroicArcade.CC.Core
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
         [SerializeField] float maxSprintSpeed; //9
         public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
-        /*[HideInInspector] */public float CurrentMaxMoveSpeed;
+        [HideInInspector] public float CurrentMaxMoveSpeed;
         [HideInInspector] public Vector3 velocity = Vector3.zero;
         [HideInInspector] public float velocityXZ = 0f;
         [SerializeField] AutoAiming autoAiming;
         public AutoAiming AutoAiming { get => autoAiming; }
         [SerializeField] float moveAcceleration;
         public float MoveAcceleration { get => moveAcceleration; set => moveAcceleration = value; }
+        [SerializeField] float frictionAcceleration;
+        public float FrictionAcceleration { get => frictionAcceleration; set => frictionAcceleration = value; }
 
         [HideInInspector] public MoveContact[] moveContacts = CharacterMover.NewMoveContactArray;
         [HideInInspector] public int contactCount;

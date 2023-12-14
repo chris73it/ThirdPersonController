@@ -6443,12 +6443,12 @@ PrefabInstance:
     - target: {fileID: 1070653934254849907, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017191804
+      value: -0.000000017191805
       objectReference: {fileID: 0}
     - target: {fileID: 1070653934254849907, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -7.081077e-10
+      value: 7.081078e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2391195172287169829, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
         type: 3}
@@ -6459,6 +6459,16 @@ PrefabInstance:
         type: 3}
       propertyPath: maxSprintSpeed
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695044243556685655, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
+        type: 3}
+      propertyPath: moveAcceleration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695044243556685655, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
+        type: 3}
+      propertyPath: frictionAcceleration
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 5944540367761342397, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
         type: 3}
@@ -6528,12 +6538,12 @@ PrefabInstance:
     - target: {fileID: 7964224052638138614, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017191805
+      value: 0.000000017191804
       objectReference: {fileID: 0}
     - target: {fileID: 7964224052638138614, guid: 5bd130dbfbad38b4d80d5dc47279c17c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 7.081078e-10
+      value: -7.081077e-10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

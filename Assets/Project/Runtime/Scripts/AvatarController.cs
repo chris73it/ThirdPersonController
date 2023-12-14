@@ -87,6 +87,8 @@ namespace HeroicArcade.CC.Core
             mover.canClimbSteepSlope = true;
         }
 
+        public Vector3 oldMovementInput;
+        public Vector3 movementInput;
         Target target2;
         private void Update()
         {
@@ -95,16 +97,44 @@ namespace HeroicArcade.CC.Core
             Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
 
             float deltaTime = Time.deltaTime;
-            Vector3 movementInput = GetMovementInput();
+            if (movementInput.sqrMagnitude >= 1E-06f)
+            {
+                oldMovementInput = movementInput;
+            }
+            else
+            {
+                oldMovementInput *= 0.9f;
+                if (oldMovementInput.sqrMagnitude < 1E-06f)
+                {
+                    oldMovementInput = Vector3.zero;
+                }
+            }
+            movementInput = GetMovementInput();
 
-            Character.velocityXZ += Character.MoveAcceleration * deltaTime;
+            if (movementInput.sqrMagnitude >= 1E-06f)
+            {
+                Character.velocityXZ += Character.MoveAcceleration * deltaTime;
+                Character.velocity = Character.velocityXZ * movementInput;
+            }
             if (Character.velocityXZ > Character.CurrentMaxMoveSpeed)
                 Character.velocityXZ = Character.CurrentMaxMoveSpeed;
+
+            Character.velocityXZ += Character.FrictionAcceleration * deltaTime;
+            if (movementInput.sqrMagnitude >= 1E-06f)
+            {
+                Character.velocity = Character.velocityXZ * movementInput;
+            }
+            else
+            {
+                Character.velocity = Character.velocityXZ * oldMovementInput;
+            }
+            if (Character.velocityXZ < 0)
+                Character.velocityXZ = 0;
 
             Vector3 velocityY = moveSpeed * movementInput; // ???
             //Vector3 velocityY = Character.JumpSpeed * movementInput;
 
-            Character.velocity = Character.velocityXZ * movementInput;
+            //Character.velocity = Character.velocityXZ * movementInput;
             HandleOverlaps();
 
             bool groundDetected = DetectGroundAndCheckIfGrounded(out bool isGrounded, out GroundInfo groundInfo);
@@ -144,19 +174,19 @@ namespace HeroicArcade.CC.Core
 
             if (isGrounded)
             {
-                if (movementInput.sqrMagnitude < 1E-06f)
-                {
-                    Character.velocityXZ = 0f;
-                    //Character.Animator.SetBool("IsSprintPressed", false);
-                }
+                //if (movementInput.sqrMagnitude < 1E-06f)
+                //{
+                //    Character.velocityXZ = 0f;
+                //    //Character.Animator.SetBool("IsSprintPressed", false);
+                //}
 
                 //Character.Animator.SetFloat("MoveSpeed",
                 //    new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.CurrentMaxMoveSpeed);
 
-                if (Character.velocityXZ >= 1E-06f)
-                {
-                    //Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
-                }
+                //if (Character.velocityXZ >= 1E-06f)
+                //{
+                //    //Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
+                //}
 
                 //Character.CurrentMaxMoveSpeed = Character.CurrentMaxWalkSpeed;
             }
