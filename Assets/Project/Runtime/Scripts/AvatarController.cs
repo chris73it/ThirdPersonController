@@ -87,11 +87,22 @@ namespace HeroicArcade.CC.Core
             mover.canClimbSteepSlope = true;
         }
 
+        bool spawningIsOver = false;
+        public void SpawningIsOver()
+        {
+            spawningIsOver = true;
+        }
+
         public Vector3 oldMovementInput;
         public Vector3 movementInput;
         Target target2;
         private void Update()
         {
+            if (!spawningIsOver)
+            {
+                return;
+            }
+
             Character.Animator.SetBool("IsAimPressed", Character.InputController.IsAimPressed);
             Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
             Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
